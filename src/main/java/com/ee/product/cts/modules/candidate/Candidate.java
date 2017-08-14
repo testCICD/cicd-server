@@ -1,17 +1,25 @@
 package com.ee.product.cts.modules.candidate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity()
 public class Candidate {
+  @Id
+  @GeneratedValue
   private int id;
   private String name;
   private String location;
   private String recruiter;
-  private List<String> skills;
+
+  private ArrayList<String> skills;
 
   public Candidate() {}
 
-  public Candidate(String name, String location, String recruiter, List<String> skills) {
+  public Candidate(String name, String location, String recruiter, ArrayList<String> skills) {
     this.name = name;
     this.location = location;
     this.recruiter = recruiter;
@@ -42,11 +50,15 @@ public class Candidate {
     this.recruiter = recruiter;
   }
 
-  public List<String> getSkills() {
+  public ArrayList<String> getSkills() {
     return skills;
   }
 
-  public void setSkills(List<String> skills) {
+  public void setSkills(ArrayList<String> skills) {
     this.skills = skills;
+  }
+
+  public int getId() {
+    return id;
   }
 }
