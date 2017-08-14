@@ -1,20 +1,39 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
 import './App.css';
+import CandidatesComponent from "../CandidatesComponent/CandidatesComponent";
+import fetch from "isomorphic-fetch"
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      candidates: []
+    };
+  }
+
+  componentDidMount() {
+    fetch('/api/candidates', {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then((response) => {
+          if (response.status >= 400) {
+            throw new Error("Bad response from server");
+          }
+          return response.json();
+        }).then((responseJson) => {
+          if (responseJson.page && responseJson.page.totalElements > 0) {
+            this.setState({ candidates: responseJson._embedded.candidates});
+          }
+      });
+  }
+
   render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Recruitment App</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    return (this.state.candidates ? <div style={{ textAlign: 'center'}}><h3>Candidates List</h3><div className='App'><CandidatesComponent candidates={this.state.candidates}/></div></div> : <div className='App'>Loading Candidates</div>);
   }
 }
 

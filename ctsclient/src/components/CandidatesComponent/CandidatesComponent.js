@@ -1,20 +1,20 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './CandidatesComponent.css';
 import CandidateComponent from '../CandidateComponent/CandidateComponent';
 
 class CandidatesComponent extends Component {
 
+
   renderCandidates = () => {
-    // let candidatesDOM = [];
     return this.props.candidates.map((candidate) => {
-      return <CandidateComponent name={candidate.name}/>
+      return <CandidateComponent className='candidate' name={candidate.name}/>
     });
-    // return candidatesDOM;
   };
 
   render() {
     return (
-      <div>{this.renderCandidates()}</div>
+      <div className='candidates'>{this.renderCandidates()}</div>
     );
   }
 }

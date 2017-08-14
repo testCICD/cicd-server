@@ -1,7 +1,11 @@
 .root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
   padding: 10px;
-  margin: 10px;
+  margin-bottom: 10px;
   border: 1px solid gray;
   border-radius: 10px;
-  width: 100%;
 }

@@ -1,3 +1,10 @@
-.root {
-    width: 400px;
+.candidate {
+    width: 100%;
+}
+
+.candidates {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    width: 100%;
 }
