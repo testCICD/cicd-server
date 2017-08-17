@@ -47,6 +47,6 @@ jobs:
       - run: |
           TAG=v1
           BUILD_NAME=pratikadhau/cts-server
-          docker build -t $BUILD_NAME:$TAG .      # (3)
+          docker build -t $BUILD_NAME:$CIRCLE_BUILD_NUM .      # (3)
           docker login -u pratikadhau -p Password@123         # (4)
           docker push $BUILD_NAME:$TAG
