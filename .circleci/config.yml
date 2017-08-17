@@ -38,14 +38,14 @@ jobs:
       # build and push Docker image
       - run:
         name: "create and push docker image"
-        environment:
-           DOCKER_HUB_ACCT: pratikadhau
-           DOCKER_HUB_REPOSITORY: cts-client
-           PASSWORD: Password@123
-        command: |
-          TAG=v1
-          BUILD_NAME=pratikadhau/cts-server
-          docker build -t $BUILD_NAME:$CIRCLE_BUILD_NUM .
-          docker tag  $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
-          docker login -u pratikadhau -p Password@123
-          docker push $BUILD_NAME:$TAG
+          environment:
+              DOCKER_HUB_ACCT: pratikadhau
+              DOCKER_HUB_REPOSITORY: cts-server
+              PASSWORD: Password@123
+          command: |
+              docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM .
+              docker tag  $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
+              docker login -u $DOCKER_HUB_ACCT -p $PASSWORD
+              docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM
+              docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
+
