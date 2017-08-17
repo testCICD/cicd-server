@@ -3,15 +3,27 @@ jobs:
     docker:
       - image: circleci/openjdk:8-jdk
 
-    working_directory: ~/repo
+    working_directory:
+      ~/app
+
+    branches:
+      only:
+        - master
 
     steps:
       - checkout
-      - run: gradle build
-      - run: cp build/libs/*.jar cts-server-latest.jar
-      - setup_remote_docker
+
       - run:
-        name: "create and push docker image"
+          name: "build app"
+          command: gradle build
+      - run:
+          name: "copy jar"
+          command: cp build/libs/*.jar cts-server-latest.jar
+
+      - setup_remote_docker
+
+      - run:
+          name: "create and push docker image"
           environment:
               DOCKER_HUB_ACCT: pratikadhau
               DOCKER_HUB_REPOSITORY: cts-server
@@ -22,4 +34,3 @@ jobs:
               docker login -u $DOCKER_HUB_ACCT -p $PASSWORD
               docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM
               docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
-
