@@ -25,9 +25,9 @@ jobs:
       - run:
           name: "create and push docker image"
           environment:
-              DOCKER_HUB_ACCT: pratikadhau
-              DOCKER_HUB_REPOSITORY: cts-server
-              PASSWORD: Password@123
+              DOCKER_HUB_ACCT: eevirendra
+              DOCKER_HUB_REPOSITORY: cicd-server
+              PASSWORD: Security@s1
           command: |
               docker build -t $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM .
               docker tag  $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
