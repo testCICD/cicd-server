@@ -34,3 +34,8 @@ jobs:
               docker login -u $DOCKER_HUB_ACCT -p $PASSWORD
               docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:$CIRCLE_BUILD_NUM
               docker push $DOCKER_HUB_ACCT/$DOCKER_HUB_REPOSITORY:latest
+    deployment:
+      staging:
+        branch: master
+        heroku:
+          appname: cicd-server
